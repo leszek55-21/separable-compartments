@@ -1,4 +1,4 @@
-package com.szymaszekleszek.search;
+package com.szymaszekleszek.count;
 
 import com.szymaszekleszek.model.Compartment;
 import com.szymaszekleszek.sort.CompartmentSorter;
