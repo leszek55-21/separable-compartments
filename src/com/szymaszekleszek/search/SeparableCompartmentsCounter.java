@@ -7,16 +7,18 @@ import java.util.*;
 
 public class SeparableCompartmentsCounter {
 
-    public int count (Compartment... compartments) {
+    public int count(Compartment... compartments) {
         List<Compartment> sortedCompartments = new CompartmentSorter().sort(compartments);
         if(sortedCompartments.isEmpty()) {
             return 0;
         }
         int counter = 1;
         for (int i = 0; i < sortedCompartments.size() - 1; i++) {
-            if (compartmentsOverlaps(sortedCompartments, i)) {
-                if (sortedCompartments.get(i).getEnd() > sortedCompartments.get(i + 1).getEnd()) {
-                    sortedCompartments.get(i + 1).setEnd(sortedCompartments.get(i).getEnd());
+            Compartment first = sortedCompartments.get(i);
+            Compartment second = sortedCompartments.get(i + 1);
+            if (compartmentsOverlaps(first, second)) {
+                if (secondIsIncludedInFirst(first, second)) {
+                    second.setEnd(first.getEnd());
                 }
             } else {
                 counter++;
@@ -25,7 +27,11 @@ public class SeparableCompartmentsCounter {
         return counter;
     }
 
-    private boolean compartmentsOverlaps (List<Compartment> sortedCompartments, int i) {
-        return sortedCompartments.get(i).getEnd() >= sortedCompartments.get(i + 1).getStart();
+    private boolean secondIsIncludedInFirst (Compartment first, Compartment second) {
+        return first.getEnd() > second.getEnd();
+    }
+
+    private boolean compartmentsOverlaps (Compartment first, Compartment second) {
+        return first.getEnd() >= second.getStart();
     }
 }

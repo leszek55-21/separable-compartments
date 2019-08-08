@@ -16,7 +16,7 @@ public class Main {
                 new Compartment(10,20),
                 new Compartment(1,2),
                 new Compartment(55,66)
-                );
+        );
         System.out.println(count);
     }
 
