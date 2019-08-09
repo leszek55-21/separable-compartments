@@ -14,11 +14,11 @@ public class SeparableCompartmentsCounter {
         }
         int counter = 1;
         for (int i = 0; i < sortedCompartments.size() - 1; i++) {
-            Compartment first = sortedCompartments.get(i);
-            Compartment second = sortedCompartments.get(i + 1);
-            if (compartmentsOverlaps(first, second)) {
-                if (secondIsIncludedInFirst(first, second)) {
-                    second.setEnd(first.getEnd());
+            Compartment current = sortedCompartments.get(i);
+            Compartment next = sortedCompartments.get(i + 1);
+            if (compartmentsOverlaps(current, next)) {
+                if (nextIsIncludedInCurrent(current, next)) {
+                    next.setEnd(current.getEnd());
                 }
             } else {
                 counter++;
@@ -27,7 +27,7 @@ public class SeparableCompartmentsCounter {
         return counter;
     }
 
-    private boolean secondIsIncludedInFirst (Compartment first, Compartment second) {
+    private boolean nextIsIncludedInCurrent(Compartment first, Compartment second) {
         return first.getEnd() > second.getEnd();
     }
 
